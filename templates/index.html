@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔍 AI Code Reviewer</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+    <div class="header">
+        <div class="header-left">
+            <span class="logo">🔍</span>
+            <div>
+                <h1>AI Code Reviewer</h1>
+                <p>Security · Quality · Documentation — Powered by LangGraph</p>
+            </div>
+        </div>
+        <div class="header-right">
+            <select id="language-select" class="lang-select">
+                <option value="python">Python</option>
+                <option value="javascript">JavaScript</option>
+                <option value="java">Java</option>
+                <option value="cpp">C++</option>
+                <option value="typescript">TypeScript</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="layout">
+
+        <!-- LEFT — Code Input -->
+        <div class="left-panel">
+            <div class="panel-header">
+                <h3>📝 Paste Your Code</h3>
+                <button class="btn-example" onclick="loadExample()">
+                    Load Example
+                </button>
+            </div>
+
+            <textarea
+                id="code-input"
+                placeholder="Paste your code here...
+
+def get_user(user_id):
+    query = 'SELECT * FROM users WHERE id = ' + user_id
+    password = 'admin123'
+    return eval(query)"
+                spellcheck="false"
+            ></textarea>
+
+            <div class="code-info">
+                <span id="char-count">0 characters</span>
+                <span id="line-count">0 lines</span>
+            </div>
+
+            <button class="btn-review" onclick="reviewCode()" id="review-btn">
+                🔍 Review Code
+            </button>
+        </div>
+
+        <!-- RIGHT — Results -->
+        <div class="right-panel">
+
+            <!-- Agent Status -->
+            <div class="agents-status">
+                <div class="agent-status" id="status-security">
+                    <span class="agent-dot"></span>
+                    <span>🔒 Security Agent</span>
+                    <span class="agent-state" id="state-security">waiting</span>
+                </div>
+                <div class="agent-status" id="status-quality">
+                    <span class="agent-dot"></span>
+                    <span>⚡ Quality Agent</span>
+                    <span class="agent-state" id="state-quality">waiting</span>
+                </div>
+                <div class="agent-status" id="status-docs">
+                    <span class="agent-dot"></span>
+                    <span>📚 Docs Agent</span>
+                    <span class="agent-state" id="state-docs">waiting</span>
+                </div>
+                <!-- Add fix agent status -->
+                <div class="agent-status" id="status-fix">
+                    <span class="agent-dot"></span>
+                    <span>🔧 Fix Agent</span>
+                    <span class="agent-state" id="state-fix">waiting</span>
+                </div>
+            </div>
+
+            <!-- Results Tabs -->
+            <div class="tabs">
+                <button class="tab active" onclick="showTab('report')">
+                    📊 Final Report
+                </button>
+                <button class="tab" onclick="showTab('security')">
+                    🔒 Security
+                </button>
+                <button class="tab" onclick="showTab('quality')">
+                    ⚡ Quality
+                </button>
+                <button class="tab" onclick="showTab('docs')">
+                    📚 Docs
+                </button>
+                <button class="tab" onclick="showTab('fix')">
+                🔧 Fixed Code
+                </button>
+            </div>
+
+            <!-- Tab Content -->
+            <div id="tab-report" class="tab-content active">
+                <div class="placeholder">
+                    <span class="placeholder-icon">🔍</span>
+                    <p>Paste your code and click Review</p>
+                    <p class="placeholder-hint">3 AI agents will analyse your code simultaneously</p>
+                </div>
+            </div>
+
+            <div id="tab-security" class="tab-content">
+                <div class="placeholder">
+                    <span class="placeholder-icon">🔒</span>
+                    <p>Security review will appear here</p>
+                </div>
+            </div>
+
+            <div id="tab-quality" class="tab-content">
+                <div class="placeholder">
+                    <span class="placeholder-icon">⚡</span>
+                    <p>Quality review will appear here</p>
+                </div>
+            </div>
+
+            <div id="tab-docs" class="tab-content">
+                <div class="placeholder">
+                    <span class="placeholder-icon">📚</span>
+                    <p>Documentation review will appear here</p>
+                </div>
+            </div>
+
+            <div id="tab-fix" class="tab-content">
+               <div class="placeholder">
+                 <span class="placeholder-icon">🔧</span>
+                 <p>Fixed code will appear here</p>
+               </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>
